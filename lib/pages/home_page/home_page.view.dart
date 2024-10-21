@@ -46,7 +46,7 @@ class HomePageView extends GetResponsiveView<HomePageController> {
                     const SizedBox(height: 10),
                     _dateWidget(context),
                     const SizedBox(height: 10),
-                    _dropDownWidget(),
+                    _dropDownWidget(context),
                     const SizedBox(height: 10),
                     Center(
                       child: InkWell(
@@ -191,8 +191,10 @@ class HomePageView extends GetResponsiveView<HomePageController> {
 
   _dateWidget(context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.43,
           child: TextFormField(
             decoration: InputDecoration(
               labelText: AppStrings.departure,
@@ -217,7 +219,8 @@ class HomePageView extends GetResponsiveView<HomePageController> {
           ),
         ),
         const SizedBox(width: 16),
-        Expanded(
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.43,
           child: TextFormField(
             decoration: InputDecoration(
               labelText: AppStrings.returnText,
@@ -245,10 +248,12 @@ class HomePageView extends GetResponsiveView<HomePageController> {
     );
   }
 
-  _dropDownWidget() {
+  _dropDownWidget(context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.43,
           child: DropdownButtonFormField(
             decoration: InputDecoration(
               labelText: AppStrings.travelers,
@@ -263,7 +268,8 @@ class HomePageView extends GetResponsiveView<HomePageController> {
           ),
         ),
         const SizedBox(width: 16),
-        Expanded(
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.43,
           child: DropdownButtonFormField(
             decoration: const InputDecoration(
               labelText: 'Class',
@@ -405,45 +411,43 @@ class HomePageView extends GetResponsiveView<HomePageController> {
                 ],
               ),
               const SizedBox(height: 20),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 214, 243, 215),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: Column(
-                          children: [
-                            ...controller.destinationList.map((data) {
-                              return InkWell(
-                                onTap: () {
-                                  Get.back(result: data);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 15.0,
-                                    horizontal: 30,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        data,
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          ],
-                        ),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 214, 243, 215),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
-                    ],
-                  ),
+                      child: Column(
+                        children: [
+                          ...controller.destinationList.map((data) {
+                            return InkWell(
+                              onTap: () {
+                                Get.back(result: data);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 15.0,
+                                  horizontal: 30,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      data,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
